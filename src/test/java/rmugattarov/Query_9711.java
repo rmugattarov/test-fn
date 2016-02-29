@@ -33,7 +33,7 @@ public class Query_9711 {
             System.out.printf("\nStart time : %s\n\n", startTime);
             SearchSQL searchSQL = new SearchSQL(
                     "SELECT " +
-                            "p.IdPack,d.Id,d.DateCreated,h.NewStatus,e.Department " +
+                            "p.IdPack,d.Id,d.DateCreated,h.NewStatus,h.PackStateChangeDate,e.Department " +
                             "FROM ((SzmnDocuments d " +
                             "INNER JOIN DocumentsPack p " +
                             "ON d.IdPack=p.IdPack) " +
@@ -42,10 +42,15 @@ public class Query_9711 {
                             "INNER JOIN Employee e " +
                             "ON d.CuratorFullLogin=e.Ad_User " +
                             "WHERE " +
+                            "(d.DateCreated<=20160229T180000Z) " +
+                            "AND " +
                             "(d.DocDate>=20160215T000000Z AND d.DocDate<=20160229T180000Z) " +
-                            "AND (h.PackStateChangeDate>=20160215T000000Z AND h.PackStateChangeDate<=20160229T180000Z) " +
-                            "AND (e.Department='Департамент тестирования') " +
-                            "AND (e.IsCurrentVersion=TRUE)"
+                            "AND " +
+                            "(h.PackStateChangeDate>=20160215T000000Z AND h.PackStateChangeDate<=20160229T180000Z) " +
+                            "AND " +
+                            "(e.Department='Департамент тестирования') " +
+                            "AND " +
+                            "(e.IsCurrentVersion=TRUE) "
             );
             RepositoryRowSet repositoryRowSet = searchScope.fetchRows(searchSQL, null, null, true);
             Iterator<RepositoryRow> iterator = repositoryRowSet.iterator();
@@ -53,13 +58,12 @@ public class Query_9711 {
             while (iterator.hasNext()) {
                 RepositoryRow row = iterator.next();
                 Properties properties = row.getProperties();
-                System.out.printf("%d) IdPack : %s Id : %s DateCreated : %s NewStatus : %s CuratorDepartment : %s\n",
+                System.out.printf("%d) Id : %s DateCreated : %s NewStatus : %s PackStateChangeDate : %s\n",
                         ++counter,
-                        properties.getStringValue("IdPack"),
                         properties.getIdValue("Id"),
                         properties.getDateTimeValue("DateCreated"),
                         properties.getStringValue("NewStatus"),
-                        properties.getStringValue("Department")
+                        properties.getDateTimeValue("PackStateChangeDate")
                 );
             }
             Date finishTime = new Date();
