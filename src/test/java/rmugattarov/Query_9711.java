@@ -40,8 +40,7 @@ public class Query_9711 {
                             "INNER JOIN PackChangeHistory h " +
                             "ON p.This=h.AnnotatedObject " +
                             "WHERE " +
-                            "(d.IsCurrentVersion=TRUE) " +
-                            "AND (d.DocDate>=20160215T000000Z AND d.DocDate<=20160229T180000Z) " +
+                            "(d.DocDate>=20160215T000000Z AND d.DocDate<=20160229T180000Z) " +
                             "AND (h.PackStateChangeDate>=20160215T000000Z AND h.PackStateChangeDate<=20160229T180000Z)"
             );
             RepositoryRowSet repositoryRowSet = searchScope.fetchRows(searchSQL, null, null, true);
