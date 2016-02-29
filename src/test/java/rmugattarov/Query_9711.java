@@ -50,7 +50,8 @@ public class Query_9711 {
                             "AND " +
                             "(e.Department='Департамент тестирования') " +
                             "AND " +
-                            "(e.IsCurrentVersion=TRUE) "
+                            "(e.IsCurrentVersion=TRUE) " +
+                            "ORDER BY h.PackStateChangeDate DESC "
             );
             RepositoryRowSet repositoryRowSet = searchScope.fetchRows(searchSQL, null, null, true);
             Iterator<RepositoryRow> iterator = repositoryRowSet.iterator();
