@@ -32,7 +32,7 @@ public class Query_9711 {
             Date startTime = new Date();
             System.out.printf("\nStart time : %s\n\n", startTime);
             SearchSQL searchSQL = new SearchSQL(
-                    "SELECT TOP 100 " +
+                    "SELECT " +
                             "d.Id,d.DateCreated,h.NewStatus " +
                             "FROM (SzmnDocuments d " +
                             "INNER JOIN DocumentsPack p " +
