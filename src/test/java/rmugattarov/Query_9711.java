@@ -36,7 +36,7 @@ public class Query_9711 {
                             "p.IdPack,d.Id,d.DateCreated,h.NewStatus,e.Department " +
                             "FROM ((SzmnDocuments d " +
                             "INNER JOIN DocumentsPack p " +
-                            "ON d.IdPack=p.IdPack)" +
+                            "ON d.IdPack=p.IdPack) " +
                             "INNER JOIN PackChangeHistory h " +
                             "ON p.This=h.AnnotatedObject) " +
                             "INNER JOIN Employee e " +
