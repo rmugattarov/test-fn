@@ -33,7 +33,7 @@ public class Query_9711 {
             System.out.printf("\nStart time : %s\n\n", startTime);
             SearchSQL searchSQL = new SearchSQL(
                     "SELECT " +
-                            "d.Id,d.DateCreated,h.NewStatus " +
+                            "p.IdPack,d.Id,d.DateCreated,h.NewStatus " +
                             "FROM (SzmnDocuments d " +
                             "INNER JOIN DocumentsPack p " +
                             "ON d.IdPack=p.IdPack)" +
@@ -49,7 +49,7 @@ public class Query_9711 {
             while (iterator.hasNext()) {
                 RepositoryRow row = iterator.next();
                 Properties properties = row.getProperties();
-                System.out.printf("%d) Id : %s DateCreated : %s NewStatus : %s\n", ++counter, properties.getIdValue("Id"), properties.getDateTimeValue("DateCreated"), properties.getStringValue("NewStatus"));
+                System.out.printf("%d) IdPack : %s, Id : %s DateCreated : %s NewStatus : %s\n", ++counter, properties.getStringValue("IdPack"), properties.getIdValue("Id"), properties.getDateTimeValue("DateCreated"), properties.getStringValue("NewStatus"));
             }
             Date finishTime = new Date();
             System.out.printf("\nFinish time : %s\n", finishTime);
