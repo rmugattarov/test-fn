@@ -33,7 +33,7 @@ public class Query_9711 {
             System.out.printf("\nStart time : %s\n\n", startTime);
             SearchSQL searchSQL = new SearchSQL(
                     "SELECT " +
-                            "d.VersionSeries,h.NewStatus,h.PackStateChangeDate,e.Department " +
+                            "d.DocTitleCodeExd,d.VersionSeries,h.NewStatus,h.PackStateChangeDate,e.Department " +
                             "FROM ((SzmnDocuments d " +
                             "INNER JOIN DocumentsPack p " +
                             "ON d.IdPack=p.IdPack) " +
@@ -59,11 +59,13 @@ public class Query_9711 {
                 RepositoryRow row = iterator.next();
                 Properties properties = row.getProperties();
                 System.out.printf("%d) " +
+                                "Code : %s " +
                                 "VsId : %s " +
                                 "PackStateChangeDate : %s " +
                                 "NewStatus : %s " +
                                 "\n",
                         ++counter,
+                        properties.getInteger32Value("DocTitleCodeExd"),
                         properties.getIdValue("VersionSeries"),
                         properties.getDateTimeValue("PackStateChangeDate"),
                         properties.getStringValue("NewStatus")
