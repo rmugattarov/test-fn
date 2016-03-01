@@ -10,7 +10,7 @@ import javax.security.auth.Subject;
 /**
  * Created by rmugattarov on 01.03.2016.
  */
-public class FetchNonExistantDoc {
+public class FetchNonExistentDoc {
     @Test
     public void test() {
         Connection connection = Factory.Connection.getConnection("http://172.28.24.182:9080/wsi/FNCEWS40MTOM/");
