@@ -24,7 +24,7 @@ import java.util.List;
 public class QueryByIdFn {
     @Test
     public void test() {
-        Connection connection = Factory.Connection.getConnection("http://172.28.24.184:9080/wsi/FNCEWS40MTOM/");
+        Connection connection = Factory.Connection.getConnection("http://172.28.24.182:9080/wsi/FNCEWS40MTOM/");
         Subject subject = UserContext.createSubject(connection, "rmugattarov@tn.fntst.ru", "o9p0[-]=", null);
         UserContext.get().pushSubject(subject);
         try {
@@ -34,21 +34,21 @@ public class QueryByIdFn {
             Date startTime = new Date();
             System.out.printf("\nStart time : %s\n\n", startTime);
             int batchSize = 10000;
-            SearchSQL fetchIdsSearchSql = new SearchSQL("SELECT TOP " + batchSize + " Id FROM Document");
+            SearchSQL fetchIdsSearchSql = new SearchSQL("SELECT TOP " + batchSize + " VersionSeries FROM Document");
             Iterator<RepositoryRow> rows = searchScope.fetchRows(fetchIdsSearchSql, null, null, true).iterator();
             List<Id> ids = new ArrayList<>();
             while (rows.hasNext()) {
-                ids.add(rows.next().getProperties().getIdValue("Id"));
+                ids.add(rows.next().getProperties().getIdValue("VersionSeries"));
             }
             Date finishedFetchingIds = new Date();
             System.out.printf("Fetched %d ids in %f s\n", batchSize, (finishedFetchingIds.getTime() - startTime.getTime()) / 1000D);
 
-            StringBuilder docsByIdQuery = new StringBuilder("SELECT Id From Document WHERE Id=").append(Joiner.on(" OR Id=").join(ids));
+            StringBuilder docsByIdQuery = new StringBuilder("SELECT VersionSeries From Document WHERE VersionSeries=").append(Joiner.on(" OR VersionSeries=").join(ids));
             SearchSQL fetchDocsSearchSql = new SearchSQL(docsByIdQuery.toString());
             Iterator<RepositoryRow> docs = searchScope.fetchRows(fetchDocsSearchSql, null, null, true).iterator();
             int counter = 0;
             while (docs.hasNext()) {
-                Id docId = docs.next().getProperties().getIdValue("Id");
+                Id docId = docs.next().getProperties().getIdValue("VersionSeries");
                 System.out.printf("%d) %s\n", ++counter, docId);
             }
             Date finishedFetchingDocs = new Date();
