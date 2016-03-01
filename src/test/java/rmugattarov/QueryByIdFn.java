@@ -35,7 +35,7 @@ public class QueryByIdFn {
             System.out.printf("\nStart time : %s\n\n", startTime);
             int batchSize = 10000;
             SearchSQL fetchIdsSearchSql = new SearchSQL("SELECT TOP " + batchSize + " VersionSeries FROM Document");
-            Iterator<RepositoryRow> rows = searchScope.fetchRows(fetchIdsSearchSql, null, null, true).iterator();
+            Iterator<RepositoryRow> rows = searchScope.fetchRows(fetchIdsSearchSql, 5000, null, true).iterator();
             List<Id> ids = new ArrayList<>();
             while (rows.hasNext()) {
                 ids.add(rows.next().getProperties().getIdValue("VersionSeries"));
@@ -45,7 +45,7 @@ public class QueryByIdFn {
 
             StringBuilder docsByIdQuery = new StringBuilder("SELECT VersionSeries From Document WHERE VersionSeries=").append(Joiner.on(" OR VersionSeries=").join(ids));
             SearchSQL fetchDocsSearchSql = new SearchSQL(docsByIdQuery.toString());
-            Iterator<RepositoryRow> docs = searchScope.fetchRows(fetchDocsSearchSql, null, null, true).iterator();
+            Iterator<RepositoryRow> docs = searchScope.fetchRows(fetchDocsSearchSql, 5000, null, true).iterator();
             int counter = 0;
             while (docs.hasNext()) {
                 Id docId = docs.next().getProperties().getIdValue("VersionSeries");
