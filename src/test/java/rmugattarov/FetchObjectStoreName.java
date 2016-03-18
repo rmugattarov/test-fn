@@ -23,6 +23,7 @@ public class FetchObjectStoreName {
             PropertyFilter filter = new PropertyFilter();
             filter.addIncludeProperty(0, null, null, "Name", 1);
             Folder pack = Factory.Folder.fetchInstance(objectStore, "/test/rmugattarov/TNFDEV-10151", filter);
+            pack.fetchProperties(new String[] {PropertyNames.ID});
             ObjectStore objectStoreFromPack = pack.getObjectStore();
             objectStoreFromPack.fetchProperties(new String[]{PropertyNames.SYMBOLIC_NAME});
             String objectStoreName = objectStoreFromPack.get_SymbolicName();
