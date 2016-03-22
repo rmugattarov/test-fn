@@ -26,18 +26,19 @@ public class CheckoutCheckin {
             Document document = Factory.Document.fetchInstance(objectStore, new Id("{C0FD9C53-0000-C7FA-A521-975F88988842}"), null);
             System.out.println(document.get_MajorVersionNumber());
 
-//            if (!document.get_IsCurrentVersion()) {
-//                System.out.println("Not current version");
-//                document = (Document) document.get_CurrentVersion();
-//            } else {
-//                System.out.println("Current version");
-//            }
-//
-//            document.checkout(ReservationType.EXCLUSIVE, null, null, null);
-//            document.save(RefreshMode.REFRESH);
+            if (!document.get_IsCurrentVersion()) {
+                System.out.println("Not current version");
+                document = (Document) document.get_CurrentVersion();
+            } else {
+                System.out.println("Current version");
+            }
+
+            document.checkout(ReservationType.EXCLUSIVE, null, null, null);
+            document.save(RefreshMode.REFRESH);
 
             document = (Document) document.get_Reservation();
             document.checkin(AutoClassify.DO_NOT_AUTO_CLASSIFY, CheckinType.MAJOR_VERSION);
+            document.getProperties().putValue("DocumentTitleEXD", "zzz");
             document.save(RefreshMode.REFRESH);
         } catch (Exception e) {
             e.printStackTrace();
