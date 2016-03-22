@@ -33,13 +33,17 @@ public class CheckoutCheckin {
                 System.out.println("Current version");
             }
 
-            document.checkout(ReservationType.EXCLUSIVE, null, null, null);
+//            document.checkout(ReservationType.EXCLUSIVE, null, null, null);
+//            document = (Document) document.get_Reservation();
+//            document.delete();
+            document = (Document) document.cancelCheckout();
+
             document.save(RefreshMode.REFRESH);
 
-            document = (Document) document.get_Reservation();
-            document.checkin(AutoClassify.DO_NOT_AUTO_CLASSIFY, CheckinType.MAJOR_VERSION);
-            document.getProperties().putValue("DocumentTitleEXD", "zzz");
-            document.save(RefreshMode.REFRESH);
+//            document = (Document) document.get_Reservation();
+//            document.checkin(AutoClassify.DO_NOT_AUTO_CLASSIFY, CheckinType.MAJOR_VERSION);
+//            document.getProperties().putValue("DocumentTitleEXD", "zzz");
+//            document.save(RefreshMode.REFRESH);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
