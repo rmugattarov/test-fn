@@ -14,7 +14,7 @@ import javax.security.auth.Subject;
 /**
  * Created by rmugattarov on 22.03.2016.
  */
-public class ChecoutCheckin {
+public class CheckoutCheckin {
     @Test
     public void test() {
         Connection connection = Factory.Connection.getConnection("http://172.28.24.182:9080/wsi/FNCEWS40MTOM/");
