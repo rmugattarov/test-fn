@@ -23,7 +23,7 @@ public class SetDocProperty {
             Document document = Factory.Document.fetchInstance(objectStore, "/test/rmugattarov/7185/7185", null);
             document = (Document) document.get_CurrentVersion();
             Properties properties = document.getProperties();
-            properties.putObjectValue("DocTitleCodeEXD", 111000013);
+            properties.putObjectValue("DocumentTitle", "Не выбран тип документа УС");
             document.save(RefreshMode.NO_REFRESH);
         } catch (Exception e) {
             e.printStackTrace();
