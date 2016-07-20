@@ -42,11 +42,15 @@ public class MigratePersonnel {
             java.util.Properties connProperties = new java.util.Properties();
             connProperties.put("user", "refuser");
             connProperties.put("password", "o9p0[-]=");
+            int total = 0;
+            int successful = 0;
             try (java.sql.Connection refDbConn = DriverManager.getConnection("jdbc:" + dbms + "://" + host + ":" + port + "/" + db, connProperties); PreparedStatement stmt = refDbConn.prepareStatement(
                     "INSERT INTO PERSONNEL(NUMBER,FIO,ACTIVE) VALUES(?,?,?)"
             )) {
+
                 while (iterator.hasNext()) {
                     try {
+                        total++;
                         RepositoryRow row = iterator.next();
                         Properties properties = row.getProperties();
                         String persNumber = properties.getStringValue("PersNumber");
@@ -58,12 +62,13 @@ public class MigratePersonnel {
                         stmt.setBoolean(3, isCatalogElementActive);
 
                         stmt.executeUpdate();
+                        successful++;
                     } catch (SQLException sqlE) {
 
                     }
                 }
             }
-
+            System.out.printf("%d - %d\r\n", total, successful);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
